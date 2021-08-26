@@ -16,6 +16,9 @@
             "src/Entity/.gitignore"
         ]
     },
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -125,6 +128,9 @@
     "ocramius/proxy-manager": {
         "version": "2.2.2"
     },
+    "php": {
+        "version": "7.2.0"
+    },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"
     },
@@ -133,12 +139,6 @@
     },
     "phpdocumentor/type-resolver": {
         "version": "0.4.0"
-    },
-    "composer/package-versions-deprecated": {
-        "version": "1.11.99"
-    },
-    "php": {
-        "version": "7.2.0"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -265,6 +265,9 @@
     "symfony/polyfill-php72": {
         "version": "v1.11.0"
     },
+    "symfony/polyfill-php73": {
+        "version": "v1.11.0"
+    },
     "symfony/profiler-pack": {
         "version": "v1.0.4"
     },
@@ -273,9 +276,6 @@
     },
     "symfony/property-info": {
         "version": "v4.2.8"
-    },
-    "symfony/polyfill-php72": {
-        "version": "v1.11.0"
     },
     "symfony/routing": {
         "version": "4.2",
