@@ -22,6 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(fields={"username"})
  * @UniqueEntity(fields={"email"})
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Table("users")
  */
 class User implements UserInterface
 {
