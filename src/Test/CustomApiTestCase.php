@@ -46,9 +46,9 @@ class CustomApiTestCase extends ApiTestCase
     /**
      * @throws TransportExceptionInterface
      */
-    protected function createUserAndLogin(Client $client, string $email, string $password): User
+    protected function createUserAndLogin(Client $client, string $email, string $password, ?array $roles = null): User
     {
-        $user = $this->createUser($email, $password);
+        $user = $this->createUser($email, $password, $roles);
         $this->logIn($client, $email, $password);
 
         return $user;
