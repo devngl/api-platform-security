@@ -26,7 +26,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     },
  *     collectionOperations={
  *          "get",
- *          "post" = { "access_control" = "is_granted('IS_AUTHENTICATED_ANONYMOUSLY')" },
+ *          "post" = {
+ *              "access_control" = "is_granted('IS_AUTHENTICATED_ANONYMOUSLY')",
+ *              "validation_groups" = { "Default", "create" }
+ *          },
  *     }
  * )
  * @ApiFilter(PropertyFilter::class)
@@ -66,8 +69,9 @@ class User implements UserInterface
     /**
      * @Groups({"user:write"})
      * @SerializedName("password")
+     * @Assert\NotBlank(groups={"create"})
      */
-    private ?string $plainPassword;
+    private ?string $plainPassword = null;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true)
