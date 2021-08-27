@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\ApiPlatform\Test;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\BrowserKit\AbstractBrowser;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
@@ -98,5 +99,10 @@ abstract class ApiTestCase extends KernelTestCase
         }
 
         return static::$container->get('api_platform.iri_converter')->getIriFromItem($item);
+    }
+
+    protected function getEntityManager(): EntityManagerInterface
+    {
+        return self::$container->get('doctrine')->getManager();
     }
 }
