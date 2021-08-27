@@ -5,7 +5,6 @@ namespace App\Test;
 use App\ApiPlatform\Test\ApiTestCase;
 use App\ApiPlatform\Test\Client;
 use App\Entity\User;
-use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class CustomApiTestCase extends ApiTestCase
