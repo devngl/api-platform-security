@@ -10,13 +10,17 @@ use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 class CustomApiTestCase extends ApiTestCase
 {
-    protected function createUser(string $email, string $password): User
+    protected function createUser(string $email, string $password, ?array $roles = null): User
     {
         $user = new User();
         $user->setEmail($email);
         $user->setUsername(substr($email, 0, strrpos($email, '@')));
         $encodedPassword = self::$container->get('security.password_encoder')->encodePassword($user, $password);
         $user->setPassword($encodedPassword);
+
+        if ($roles) {
+            $user->setRoles($roles);
+        }
 
         $em = self::$container->get('doctrine')->getManager();
         $em->persist($user);

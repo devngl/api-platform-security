@@ -38,6 +38,7 @@ class CheeseListingResourceTest extends CustomApiTestCase
         $client = self::createClient();
         $user1  = $this->createUser('user1@example.com', 'foo');
         $user2  = $this->createUser('user2@example.com', 'foo');
+        $admin = $this->createUser('admin@example.com', 'foo', ['ROLE_ADMIN']);
 
         $cheeseListing = new CheeseListing('Block of cheddar');
         $cheeseListing->setOwner($user1);
@@ -57,6 +58,12 @@ class CheeseListingResourceTest extends CustomApiTestCase
         $this->logIn($client, 'user1@example.com', 'foo');
         $client->request('PUT', '/api/cheeses/' . $cheeseListing->getId(), [
             'json' => ['title' => 'updated']
+        ]);
+        $this->assertResponseStatusCodeSame(200);
+
+        $this->logIn($client, 'admin@example.com', 'foo');
+        $client->request('PUT', '/api/cheeses/' . $cheeseListing->getId(), [
+            'json' => ['title' => 'updated by admin']
         ]);
         $this->assertResponseStatusCodeSame(200);
     }
