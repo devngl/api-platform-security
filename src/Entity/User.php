@@ -21,7 +21,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     denormalizationContext={"groups"={"user:write"}},
  *     itemOperations={
  *          "get",
- *          "put"    = { "access_control" = "is_granted('ROLE_USER') and object == user" },
+ *          "put"    = {
+ *              "access_control" = "is_granted('EDIT', previous_object)",
+ *              "access_control_message"="Only an admin or the user himself can edit this entity."
+ *          },
  *          "delete" = { "access_control" = "is_granted('ROLE_ADMIN')" },
  *     },
  *     collectionOperations={

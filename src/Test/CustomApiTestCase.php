@@ -53,4 +53,9 @@ class CustomApiTestCase extends ApiTestCase
 
         return $user;
     }
+
+    protected function clearUnitOfWork()
+    {
+        $this->getEntityManager()->getUnitOfWork()->clear();
+    }
 }

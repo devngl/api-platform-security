@@ -2,7 +2,6 @@
 
 namespace App\Tests\functional;
 
-use ApiPlatform\Core\Tests\Annotation\ApiResourceTest;
 use App\Entity\User;
 use App\Test\CustomApiTestCase;
 use Hautelook\AliceBundle\PhpUnit\ReloadDatabaseTrait;
@@ -50,23 +49,21 @@ class UserResourceTest extends CustomApiTestCase
     {
         $client        = self::createClient();
         $target        = $this->createUser('target@dev.to', 'foo');
-        $entityManager = $this->getEntityManager();
-
-        $user = $this->createUserAndLogin($client, 'user@dev.to', 'foo');
-        $client->request('PUT', '/api/users/' . $user->getId(), [
+        $this->createUserAndLogin($client, 'user@dev.to', 'foo');
+        $client->request('PUT', '/api/users/' . $target->getId(), [
             'json' => ['roles' => ['ROLE_ADMIN']]
         ]);
-        $user = $entityManager->getRepository(User::class)->find($user->getId());
-        $this->assertEquals(['ROLE_USER'], $user->getRoles());
+        $target = $this->getEntityManager()->getRepository(User::class)->find($target->getId());
+        $this->assertEquals(['ROLE_USER'], $target->getRoles());
 
-        $admin = $this->createUserAndLogin($client, 'admin@dev.to', 'foo', ['ROLE_ADMIN']);
-        $client->request('PUT', '/api/users/' . $admin->getId(), [
+        $this->createUserAndLogin($client, 'admin@dev.to', 'foo', ['ROLE_ADMIN']);
+        $client->request('PUT', '/api/users/' . $target->getId(), [
             'json' => [
                 'roles' => ['ROLE_ADMIN', 'ROLE_VIP']
             ]
         ]);
-        $admin = $entityManager->getRepository(User::class)->find($admin->getId());
-        $this->assertEquals(['ROLE_ADMIN', 'ROLE_VIP', 'ROLE_USER'], $admin->getRoles());
+        $target = $this->getEntityManager()->getRepository(User::class)->find($target->getId());
+        $this->assertEquals(['ROLE_ADMIN', 'ROLE_VIP', 'ROLE_USER'], $target->getRoles());
     }
 
     /**
